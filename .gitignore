@@ -1,0 +1,7 @@
+
+deploy.sh
+node_modules
+.DS_Store
+dist
+.nuxt
+yarn.lock

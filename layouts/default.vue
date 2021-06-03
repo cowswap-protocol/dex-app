@@ -1,0 +1,147 @@
+<template>
+  <div id="content">
+    <nav class="navbar header" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="~/static/cowbaby.png" width="28" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <router-link to="/" class="navbar-item">
+            Home
+          </router-link>
+          <router-link to="/trade" class="navbar-item">
+            Trade
+          </router-link>
+          <router-link to="/liquidity" class="navbar-item">
+            Liquidity
+          </router-link>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light">
+                <b-icon
+                    pack="fas"
+                    icon="wallet"
+                    size="is-small">
+                </b-icon>
+
+                <span>{{ shortAddr($store.state.connectedAccount) }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <nuxt />
+    </div>
+    
+    <b-message title="Transaction" :type="'is-' + tx.msgType " aria-close-label="Close message" class="tx-message" v-model="tx.hash != ''" :auto-close="tx.duration > 0" :duration="tx.duration">
+      <b-icon
+        v-if="txStatus == 'pending'"
+        pack="fas"
+        icon="sync-alt"
+        custom-class="fa-spin">
+      </b-icon>
+      <b-icon
+        v-if="txStatus == 'success'"
+        pack="fas"
+        icon="check-circle">
+      </b-icon>
+      <b-icon
+        v-if="txStatus == 'failed'"
+        pack="fas"
+        icon="times-circle">
+      </b-icon>
+      {{ txHash }}
+    </b-message>
+  </div>
+</template>
+
+<script>
+  import utils from '~/mixins/utils'
+  import config from '~/config'
+  export default {
+    data () {
+      return {
+        walletInstalled: true,
+        walletLocked: false,
+        language: {
+          en: "English",
+          zh_CN: "简体中文"
+        }
+      }
+    },
+    computed: {
+      currentLang(){
+        return  this.$store.state.locale
+      },
+      checkChainId() {
+        if(/MathWallet/i.test(window.navigator.userAgent)){
+          return true
+        }
+        if(window.detectProvider && window.detectProvider.isTrust) return true;
+        if(this.$store.state.isMathWallet) return true;
+        return config.chainId == this.$store.state.chainId
+      },
+      txHash() {
+        return this.$store.state.tx.hash;
+      },
+      txStatus() {
+        return this.$store.state.tx.status;
+      },
+      tx() {
+        return this.$store.state.tx
+      }
+    },
+    methods: {
+      checkLanguage(lang){
+        this.$i18n.locale = lang
+        this.$store.commit('updateLang', lang)
+      },
+      shortAddr(addr) {
+        return utils.shortAddr(addr)
+      },
+      async onUnlock() {
+        await this.$onConnect()
+      }
+    },
+    async created() {
+      try{
+        await this.$onConnect();
+      } catch(err) {
+        if(err.toString() == "Error: User rejected the signature request") {
+          this.walletLocked = true
+        }
+      }
+    }
+  }
+</script>
+
+
+<style>
+  body {
+    font-family: Montserrat-Thin,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif !important;
+  }
+  .header {
+    border-bottom: 1px solid #f5f5f5;
+    margin-bottom: 1rem;
+  }
+  .tx-message{
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+  }
+</style>

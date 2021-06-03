@@ -1,0 +1,1279 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "feeTo_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "AddLiquidity",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token0",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token1",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "CreatePair",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "filled",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "Redeem",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountReturn",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "RemoveLiquidity",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "date",
+        "type": "uint256"
+      }
+    ],
+    "name": "Swap",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "AMP",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "HEAD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "traded",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ZERO",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "traded",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "amountInMax",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "amountInMin",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "decimals",
+    "outputs": [
+      {
+        "internalType": "int8",
+        "name": "",
+        "type": "int8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "defaultDecimals",
+    "outputs": [
+      {
+        "internalType": "int8",
+        "name": "",
+        "type": "int8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "depth",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeForProvide",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeForReserve",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeForTake",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeTo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "gov",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "makerReservedRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "miningRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pairId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "pairs",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "prices",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardToken",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "tradedRateStored",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "traded",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "fee",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userOrders",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userRateRedeemed",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "int8",
+        "name": "decimals_",
+        "type": "int8"
+      }
+    ],
+    "name": "updateDefaultDecimals",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token_",
+        "type": "address"
+      }
+    ],
+    "name": "setRewardToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "take_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "provide_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "reserve_",
+        "type": "uint256"
+      }
+    ],
+    "name": "setFees",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenA",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenB",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rate",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMiningRate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "min_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "max_",
+        "type": "uint256"
+      }
+    ],
+    "name": "setAmountInLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to_",
+        "type": "address"
+      }
+    ],
+    "name": "migrateRewardToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenA",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenB",
+        "type": "address"
+      }
+    ],
+    "name": "createPair",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenA",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenB",
+        "type": "address"
+      },
+      {
+        "internalType": "int8",
+        "name": "decimals_",
+        "type": "int8"
+      }
+    ],
+    "name": "updatePairDecimals",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      }
+    ],
+    "name": "getPrices",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      }
+    ],
+    "name": "getDepth",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct StakeDex.Depth[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTradedRates",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "traded",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fee",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct StakeDex.Rate[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      }
+    ],
+    "name": "getPairId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      }
+    ],
+    "name": "fetchPairId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "removeLiquidity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "calcAmountInLimit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "min",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "max",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      }
+    ],
+    "name": "addLiquidity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "currentRate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "storedRate",
+        "type": "uint256"
+      }
+    ],
+    "name": "calcRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLiquidity",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "feeRewarded",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "filled",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pending",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      }
+    ],
+    "name": "getAllLiquidities",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pending",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "filled",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "feeRewarded",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct StakeDex.Liquidity[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "redeem",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOutMin",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "swap",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAmountOut",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAmountIn",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      }
+    ],
+    "name": "calcInAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountReturn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenIn",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenOut",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      }
+    ],
+    "name": "calcOutAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amountOut",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountReturn",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
