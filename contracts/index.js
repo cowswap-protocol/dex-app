@@ -2,6 +2,7 @@ import Erc20 from './erc20';
 import Erc20Reader from './erc20_reader';
 import Dex from './dex';
 import Router from './router';
+import Mock from './mock';
 
 import config from  '~/config'
 import Web3 from 'web3'
@@ -15,4 +16,5 @@ export {
 	Erc20Reader,
 	Dex,
 	Router,
+	Mock
 }

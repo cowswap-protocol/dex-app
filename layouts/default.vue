@@ -1,48 +1,47 @@
 <template>
   <div id="content">
-    <nav class="navbar header" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img src="~/static/cowbaby.png" width="28" height="28">
-        </a>
+    <b-navbar>
+        <template #brand>
+            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+                <img src="~/static/cowbaby.png" width="28" height="28">
+            </b-navbar-item>
+        </template>
+        <template #start>
+          <div class="navbar-start">
+            <router-link to="/" class="navbar-item">
+              Home
+            </router-link>
+            <router-link to="/trade" class="navbar-item">
+              Trade
+            </router-link>
+            <router-link to="/liquidity" class="navbar-item">
+              Liquidity
+            </router-link>
+            <router-link to="/tutorial" class="navbar-item">
+              Test Tutorial
+            </router-link>
+          </div>
+        </template>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <router-link to="/" class="navbar-item">
-            Home
-          </router-link>
-          <router-link to="/trade" class="navbar-item">
-            Trade
-          </router-link>
-          <router-link to="/liquidity" class="navbar-item">
-            Liquidity
-          </router-link>
-        </div>
-
-        <div class="navbar-end">
+        <template #end>
           <div class="navbar-item">
             <div class="buttons">
               <a class="button is-light">
-                <b-icon
+                <span v-if="checkChainId">
+                  <b-icon
                     pack="fas"
                     icon="wallet"
                     size="is-small">
-                </b-icon>
-
-                <span>{{ shortAddr($store.state.connectedAccount) }}</span>
+                  </b-icon><span>{{ shortAddr($store.state.connectedAccount) }}</span>
+                </span>
+                <span v-else class="wrong-network">
+                  Wrong Network. Please connect to BSC testnet
+                </span>
               </a>
             </div>
           </div>
-        </div>
-      </div>
-    </nav>
+        </template>
+    </b-navbar>
 
     <div class="container">
       <nuxt />
@@ -143,5 +142,8 @@
     position: absolute;
     right: 0;
     bottom: 1rem;
+  }
+  .wrong-network {
+    color: #f14668;
   }
 </style>

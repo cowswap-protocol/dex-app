@@ -28,12 +28,8 @@ export class Dex {
 		amountIn = new BigNumber(amountIn).shiftedBy(tokenIn.decimals)
 		amountOut = new BigNumber(amountOut).shiftedBy(tokenOut.decimals)
 		var gasPrice = await this.gasPrice();
-		var tx = this.contract.methods.addLiquidity(tokenIn.address, tokenOut.address, amountIn, amountOut);
-	  let gasLimit = 600000;
-	  try {
-	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
-	  } catch(err) {
-	  }
+		var tx = this.contract.methods.addLiquidity(tokenIn.address, tokenOut.address, toBN(amountIn), toBN(amountOut));
+	  let gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
 	  return tx.send({
 	  	value: 0,
 	    from: sender,
@@ -44,12 +40,8 @@ export class Dex {
 
 	async removeLiquidity(sender, tokenIn, tokenOut, price, callback) {
 		var gasPrice = await this.gasPrice();
-		var tx = this.contract.methods.removeLiquidity(tokenIn.address, tokenOut.address, price);
-	  let gasLimit = 600000;
-	  try {
-	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
-	  } catch(err) {
-	  }
+		var tx = this.contract.methods.removeLiquidity(tokenIn.address, tokenOut.address, toBN(price));
+	  let gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
 	  return tx.send({
 	  	value: 0,
 	    from: sender,
@@ -60,12 +52,8 @@ export class Dex {
 
 	async redeem(sender, tokenIn, tokenOut, price, callback) {
 		var gasPrice = await this.gasPrice();
-		var tx = this.contract.methods.redeem(tokenIn.address, tokenOut.address, price);
-	  let gasLimit = 600000;
-	  try {
-	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
-	  } catch(err) {
-	  }
+		var tx = this.contract.methods.redeem(tokenIn.address, tokenOut.address, toBN(price));
+	  let gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
 	  return tx.send({
 	  	value: 0,
 	    from: sender,

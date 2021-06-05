@@ -9,8 +9,8 @@ module.exports = {
 	web3Provider: "https://data-seed-prebsc-1-s1.binance.org:8545",
 
 
-	dex: "0xb8c68CC803cB9f2f19A9Bec89dFad746018e62d8",
-	router: "0x19963AB6B1BE4462a8658d4d48556345142C0893",
+	dex: "0x361a983aBe8D6293D21112f81A48dA012cB1cC91",
+	router: "0x00A57896b24A71c3f5D6F69b97346c31D5EAC42c",
 	multicall: "0x18C6421c364d3B58280DfFD14e9B0Cc205DBd591",
 	
 	baseCheckTokens: [ 

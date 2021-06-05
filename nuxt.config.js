@@ -9,7 +9,7 @@ export default {
       { hid: 'description', name: 'description', content: "New DEX on BSC" },
       { hid: 'keywords', name: 'keywords', content: 'Dapp, DeFi, Staking' },
       { name: 'twitter:title', content: 'cowswap.org' },
-      { name: 'twitter:description', content: "AMM on BSC" },
+      { name: 'twitter:description', content: "A new DEX on BSC" },
       { name: 'twitter:image', content: '/cowbaby.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:creator', content: '@StakeCow' }

@@ -161,12 +161,10 @@
             this.$store.commit('resetTx')
           }, 1000)
         }).catch(err => {
-          this.$store.commit('updateTxStatus', 'failed')
-          this.$store.commit('updateTxDuration', 1000)
-          this.$store.commit('updateTxMsgType', 'danger')
+          this.$store.commit("updateTx", { hash: err.message.substr(0, 150), status: 'failed', msgType: 'danger'})
           setTimeout(() => {
             this.$store.commit('resetTx')
-          }, 1000)
+          }, 2000)
         })
       },
       onApprove() {
@@ -187,9 +185,7 @@
             this.$store.commit('resetTx')
           }, 2000)
         }).catch(err => {
-          this.$store.commit('updateTxStatus', 'failed')
-          this.$store.commit('updateTxDuration', 1000)
-          this.$store.commit('updateTxMsgType', 'danger')
+          this.$store.commit("updateTx", { hash: err.message.substr(0, 150), status: 'failed', msgType: 'danger'})
           setTimeout(() => {
             this.$store.commit('resetTx')
           }, 2000)

@@ -26,12 +26,9 @@ export class Router {
 		let path = tokenPath.map(t => t.address)
 		let deadline = parseInt(new Date().getTime() / 1000 + 10 * 60)
 		var gasPrice = await this.gasPrice();
-		var tx = this.contract.methods.swapExactTokensForTokens(amountIn, amountOutMin, path, sender, deadline);
-	  let gasLimit = 600000;
-	  try {
-	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
-	  } catch(err) {
-	  }
+		var tx = this.contract.methods.swapExactTokensForTokens(toBN(amountIn), toBN(amountOutMin), path, sender, deadline);
+	  let gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
+	  
 	  return tx.send({
 	  	value: 0,
 	    from: sender,
@@ -42,12 +39,8 @@ export class Router {
 
 	async swapTokensForExactTokens(sender, amountOut, amountInMax, path, deadline) {
 		var gasPrice = await this.gasPrice();
-		var tx = this.contract.methods.swapTokensForExactTokens(amountOut, amountInMax, path, sender, deadline);
-	  let gasLimit = 600000;
-	  try {
-	  	gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
-	  } catch(err) {
-	  }
+		var tx = this.contract.methods.swapTokensForExactTokens(toBN(amountOut), toBN(amountInMax), path, sender, deadline);
+	  let gasLimit = await tx.estimateGas({ value: 0, from: sender, to: this.address });
 	  return tx.send({
 	  	value: 0,
 	    from: sender,
@@ -58,13 +51,13 @@ export class Router {
 	async getAmountsOut(amountIn, tokenPath) {
 		amountIn = new BigNumber(amountIn).shiftedBy(tokenPath[0].decimals)
 		let path = tokenPath.map(t => t.address)
-		let amounts = await this.contractReader.methods.getAmountsOut(amountIn, path).call();
+		let amounts = await this.contractReader.methods.getAmountsOut(toBN(amountIn), path).call();
 		return amounts.map((a, i) => BigNumber(a).shiftedBy(-tokenPath[i].decimals))
 	}
 	async getAmountsIn(amountOut, tokenPath) {
 		amountOut = new BigNumber(amountOut).shiftedBy(tokenPath[0].decimals)
 		let path = tokenPath.map(t => t.address)
-		let amounts = await this.contractReader.methods.getAmountsOut(amountOut, path).call();
+		let amounts = await this.contractReader.methods.getAmountsOut(toBN(amountOut), path).call();
 		return amounts.map((a, i) => BigNumber(a).shiftedBy(-tokenPath[i].decimals))
 	}
 }
